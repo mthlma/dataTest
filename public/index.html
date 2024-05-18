@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salvar Dados</title>
+</head>
+<body>
+  <h1>Digite seus dados</h1>
+  <form id="dataForm">
+    <input type="text" id="dataInput" required>
+    <button type="submit">Salvar</button>
+  </form>
+  <script>
+    document.getElementById('dataForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const data = document.getElementById('dataInput').value;
+      await fetch('/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data }),
+      });
+      alert('Dados salvos com sucesso!');
+      document.getElementById('dataInput').value = '';
+    });
+  </script>
+</body>
+</html>
